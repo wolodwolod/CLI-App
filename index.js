@@ -1,6 +1,3 @@
-// console.log(__dirname);
-// const yargs = require("yargs").argv;
-// const { hideBin } = ("yargs/helpers");
 const argv = require("yargs").argv;
 
 const {
@@ -9,15 +6,7 @@ const {
     removeContact,
     addContact } = require("./contacts");
 
-    // getContactById("1")
-// addContact("Mango", "mango@gmail.com", "322-22-23");
-// listContacts()
-
-// console.log(process.argv)
-
-
-
-// TODO: рефакторить
+  
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
