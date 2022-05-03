@@ -10,22 +10,32 @@ async function updateContacts(contacts) {
 };
 
 async function listContacts() {
-  const data = await fs.readFile(contactsPath);
+    try {
+    const data = await fs.readFile(contactsPath);
     const contacts = JSON.parse(data);    
     return contacts;
+    } catch (error) {
+       console.log(error) 
+    }  
 };
 
 async function getContactById(contactId) {
-    const contacts = await listContacts();
+    try {
+        const contacts = await listContacts();
     const result = contacts.find(item => item.id == contactId);
     if (!result) {
         return "Contact not found";
-    }    
+        }   
+    console.log(result)    
     return result;
+    } catch (error) {
+        console.log(error) 
+    }    
 };
-
+// getContactById(5)
 async function removeContact(contactId) {
-    const contacts = await listContacts();
+    try {
+        const contacts = await listContacts();
     const idx = contacts.findIndex(item => item.id == contactId);
     if(idx === -1){
         return "Contact not found";
@@ -33,10 +43,15 @@ async function removeContact(contactId) {
     const [result] = contacts.splice(idx, 1);
      await updateContacts(contacts);
     return result;
+    } catch (error) {
+        console.log(error) 
+    }
+    
 };
 
 async function addContact(name, email, phone) {
-    const contacts = await listContacts();
+    try {
+        const contacts = await listContacts();
     const newContact = {
         id: nanoid(),
         name,
@@ -46,6 +61,9 @@ async function addContact(name, email, phone) {
     contacts.push(newContact);
     await updateContacts(contacts);
     return newContact;
+    } catch (error) {
+        console.log(error) 
+    }    
 };
 
 
